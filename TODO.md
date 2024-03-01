@@ -6,6 +6,7 @@
 - [ ] Train the object detection model using the collected and labeled data.
 - [ ] Label the collected data with appropriate annotations for training.
 - [ ] Evaluate the trained model's performance on test datasets.
+- [ ] Test the code thoroughly with various input scenarios and validate the accuracy and efficiency of object detection.
 
 ## Speech Recognition Integration
 - [ ] Research and select a suitable speech recognition library or API.
