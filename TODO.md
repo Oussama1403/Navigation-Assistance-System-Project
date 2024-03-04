@@ -9,7 +9,8 @@
 - [ ] Test the code thoroughly with various input scenarios and validate the accuracy and efficiency of object detection.
 
 ## Speech Recognition Integration
-- [ ] Research and select a suitable speech recognition library or API.
+- [x] Research and select a suitable speech recognition library or API.
+- [ ] Develop the NLP functionality.
 - [ ] Integrate the selected speech recognition solution into the navigation system.
 - [ ] Test the speech recognition functionality in different environments and conditions.
 - [ ] Implement error handling and feedback mechanisms for speech recognition failures.
