@@ -6,6 +6,7 @@
 - [ ] Collect more diverse data from the environment (e.g., trees, cars, pedestrians).
 - [ ] Train the object detection model using the collected and labeled data.
 - [ ] Label the collected data with appropriate annotations for training.
+- [ ] Generate text data about object detected.
 - [ ] Implement Threading module for more paralell and faster detection.
 - [ ] Evaluate the trained model's performance on test datasets.
 - [ ] Test the code thoroughly with various input scenarios and validate the accuracy and efficiency of object detection.
@@ -18,6 +19,7 @@
 - [ ] Implement error handling and feedback mechanisms for speech recognition failures.
 
 ## Navigation Instructions Generation
+- [ ] Implement google maps API for generating routes to destinations.
 - [ ] Implement natural language generation techniques for generating audio-based navigation instructions based on Speech Recognition results.
 - [ ] Test the navigation instructions generation system with simulated and real-world scenarios.
 
