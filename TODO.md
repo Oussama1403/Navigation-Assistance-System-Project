@@ -10,12 +10,11 @@
 
 ## Speech Recognition Integration
 - [x] Research and select a suitable speech recognition library or API.
-- [ ] Develop the NLP functionality.
+- [ ] Implement the NLP functionality.
 - [ ] Integrate the selected speech recognition solution into the navigation system.
 - [ ] Test the speech recognition functionality in different environments and conditions.
 - [ ] Implement error handling and feedback mechanisms for speech recognition failures.
 
 ## Navigation Instructions Generation
-- [ ] Develop algorithms to generate navigation instructions based on object detection results.
-- [ ] Implement natural language generation techniques for generating human-readable instructions.
+- [ ] Implement natural language generation techniques for generating audio-based navigation instructions based on Speech Recognition results.
 - [ ] Test the navigation instructions generation system with simulated and real-world scenarios.
