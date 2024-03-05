@@ -21,7 +21,7 @@ def process_speech():
         print("Processing...")
         text = recognizer.recognize_google(audio)
         print('\033[91m' + "You said:", text + '\033[0m')
-        with open("output.txt","a") as f:
+        with open("Speech Recognition Module/output.txt","a") as f:
             f.write(text)
     except sr.UnknownValueError:
         print("Sorry, I couldn't understand the audio.")
