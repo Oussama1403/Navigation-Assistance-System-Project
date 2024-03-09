@@ -20,6 +20,7 @@
 
 ## Navigation Instructions Generation
 - [ ] Implement google maps API for generating routes to destinations.
+- [ ] Implement Orientation functionality.
 - [ ] Implement natural language generation techniques for generating audio-based navigation instructions based on Speech Recognition results.
 - [ ] Test the navigation instructions generation system with simulated and real-world scenarios.
 

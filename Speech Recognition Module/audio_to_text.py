@@ -1,15 +1,25 @@
 import speech_recognition as sr
-#import nltk
-#from nltk.tokenize import word_tokenize
-
-recognizer = sr.Recognizer()
+import nltk
+from nltk.tokenize import word_tokenize
 
 def process_text(text):
-    pass
-    # Tokenize the recognized text (split text)
-    #tokens = word_tokenize(text)
-    # Perform NLP tasks
-    # (soon will be implemented)
+    # split text using NTLK
+    tokens = word_tokenize(text)
+    if any(word in tokens for word in ["go", "take", "destination"]):
+        print("Navigational command detected.")
+        # Extract destination from text (you can implement more sophisticated NLP here)
+        destination = extract_destination(tokens)
+        if destination:
+            print("Destination:", destination)
+        else:
+            print("No destination found.")
+
+def extract_destination(tokens):
+    destinations = ["New York", "Los Angeles", "Chicago"]  # Example list of destinations
+    for word in tokens:
+        if word in destinations:
+            return word
+    return None
 
 def process_speech():
     # Record audio from the microphone
@@ -28,7 +38,12 @@ def process_speech():
     except sr.RequestError as e:
         print("Error : ", str(e))
 
+def main():
+    global recognizer
+    recognizer = sr.Recognizer()
+    while True:
+        process_speech()
 
-# Main loop for continuous speech recognition
-while True:
-    process_speech()
+if __name__ == "__main__":
+    main()
+
