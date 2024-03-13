@@ -13,7 +13,8 @@
 
 ## Speech Recognition Module
 - [x] Research and select a suitable speech recognition library or API.
-- [ ] Implement the NLP functionality to filter and extract destinations.
+- [x] Implement functionality to filter and extract destinations.
+- [ ] Add more places to `destinations.json`
 - [ ] Integrate the selected speech recognition solution into the navigation system.
 - [ ] Test the speech recognition functionality in different environments and conditions.
 - [ ] Implement error handling and feedback mechanisms for speech recognition failures.
