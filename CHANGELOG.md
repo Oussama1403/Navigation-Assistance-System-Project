@@ -4,6 +4,7 @@
 - Updated `audio_to_text.py`.
 - Add new functionality to filter and extract destinations based on matches between the recognized text and the entries in destination list avoiding the complexity of NER.
 - Added `destinations.json`.
+- Updated `README.md`- more simple and clean readme file.
 - Cleaner and more Robust code.
 
 ## March 5, 2024
