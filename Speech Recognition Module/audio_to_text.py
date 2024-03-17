@@ -1,7 +1,6 @@
 import speech_recognition as sr
 import nltk
 from nltk.tokenize import word_tokenize
-from googlemaps import Client as GoogleMaps
 import json
 
 
@@ -28,11 +27,6 @@ def extract_destinations(tokens,destinations):
         if destination.lower() in tokens:
             matched_destinations.append(destination)
     return matched_destinations
-
-def generate_route(destination):
-    gmaps = GoogleMaps('<API_KEY>')
-    # Example: directions = gmaps.directions("current location", destination, mode="driving")
-    print("Generating route to", destination)
 
 def process_speech():
     with sr.Microphone() as source:

@@ -19,9 +19,10 @@
 - [ ] Test the speech recognition functionality in different environments and conditions.
 - [ ] Implement error handling and feedback mechanisms for speech recognition failures.
 
-## Navigation Instructions Generation
-- [ ] Implement google maps API for generating routes to destinations.
-- [ ] Implement Orientation functionality.
+## Navigation Module
+- [ ] Implement google maps API for generating routes to destinations. (ON HOLD - GMAPS IS NOT FREE)
+- [x] Implement alternative for google maps API (OSM API + HERE Geocode API)
+- [ ] Integrate Both APIs for full navigation system.
 - [ ] Implement natural language generation techniques for generating audio-based navigation instructions based on Speech Recognition results.
 - [ ] Test the navigation instructions generation system with simulated and real-world scenarios.
 
