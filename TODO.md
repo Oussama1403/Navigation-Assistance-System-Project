@@ -10,6 +10,7 @@
 - [ ] Implement Threading module for more paralell and faster detection.
 - [ ] Evaluate the trained model's performance on test datasets.
 - [ ] Test the code thoroughly with various input scenarios and validate the accuracy and efficiency of object detection.
+- [ ] Provide Audio Feedback
 
 ## Speech Recognition Module
 - [x] Research and select a suitable speech recognition library or API.
@@ -25,6 +26,7 @@
 - [x] Integrate Both APIs for full navigation system.
 - [ ] Implement natural language generation techniques for generating audio-based navigation instructions based on Speech Recognition results.
 - [ ] Test the navigation instructions generation system with simulated and real-world scenarios.
+- [ ] Provide Audio Feedback
 
 ## Voice Output Module
 - [ ] Convert text instructions to audio instructions.
