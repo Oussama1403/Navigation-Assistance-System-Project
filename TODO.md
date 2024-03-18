@@ -5,12 +5,15 @@
 - [x] Complete initial steps in object detection using yolo model.
 - [ ] Collect more diverse data from the environment (e.g., trees, cars, pedestrians).
 - [ ] Train the object detection model using the collected and labeled data.
-- [ ] Label the collected data with appropriate annotations for training.
-- [ ] Generate text data about object detected.
+- [ ] Generate text data and provide Audio Feedback about object detected.
+- [ ] Text Recognition and Reading: Incorporate optical character recognition (OCR) to detect and read text in the environment. This can include reading signs, labels, menus, and other textual information, A voice command like "read the text" will activate the Text Recognition.
+- [ ] Orientation Detection: Implement a method to determine the user's orientation relative to the detected objects. This could involve analyzing the positions and orientations of objects in the camera feed to infer the user's direction of movement.
+- [ ] Scene Description: Provide verbal descriptions of the user's surroundings, including information about nearby objects, their positions, and relevant contextual details.
+- [ ] Voice Feedback: Based on the object detection results and orientation detection, generate voice feedback to guide the user towards the detected door. For example, if the door is detected to the right of the user's current position, provide voice instructions such as "Turn right and walk forward to reach the door."
+- [ ] Obstacle Detection and Avoidance: Develop algorithms to detect obstacles in the user's path and provide guidance on how to navigate around them safely.
 - [ ] Implement Threading module for more paralell and faster detection.
 - [ ] Evaluate the trained model's performance on test datasets.
 - [ ] Test the code thoroughly with various input scenarios and validate the accuracy and efficiency of object detection.
-- [ ] Provide Audio Feedback
 
 ## Speech Recognition Module
 - [x] Research and select a suitable speech recognition library or API.
