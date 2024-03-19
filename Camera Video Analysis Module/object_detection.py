@@ -1,12 +1,14 @@
 import cv2
 import numpy as np
+import os
+
 
 # Constants and Configurations
 CONFIDENCE_THRESHOLD = 0.2
 NMS_THRESHOLD = 0.6
 INPUT_FRAME_RESOLUTION = (640, 480)
 
-# Load YOLO object detection algorithm
+# Load YOLO objecGIT t detection algorithm
 def load_yolo_model(weights_file, config_file):
     return cv2.dnn.readNet(weights_file, config_file)
 
@@ -76,16 +78,18 @@ def display_frame(frame):
 
 # Main function to run object detection
 def main():
+    current_directory = os.getcwd()
+
     # Load YOLO model
-    yolo_neural_network = load_yolo_model("yolo/yolov3.weights", "yolo/cfg/yolov3.cfg")
+    yolo_neural_network = load_yolo_model(f"{current_directory}/Camera Video Analysis Module/yolo/yolov3.weights", f"{current_directory}/Camera Video Analysis Module/yolo/cfg/yolov3.cfg")
 
     # Load class names
     classes = []
-    with open("yolo/data/coco.names", "r") as f:
+    with open(f"{current_directory}/Camera Video Analysis Module/yolo/data/coco.names", "r") as f:
         classes = [line.strip() for line in f.readlines()]
 
     # Open camera for video capture
-    cap = cv2.VideoCapture(0)  # Change 0 to your camera index or video file path
+    cap = cv2.VideoCapture("http://192.168.112.193:4747/video")  # Change 0 to your camera index or video file path
 
     try:
         while True:
