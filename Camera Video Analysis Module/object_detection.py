@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import os
+import multiprocessing
+
 
 
 # Constants and Configurations
@@ -76,6 +78,13 @@ def draw_boxes(frame, class_ids, confidences, boxes, classes):
 def display_frame(frame):
     cv2.imshow("Object Detection", frame)
 
+def process_frames(frame_queue, result_queue, yolo_model, classes):
+    while True:
+        frame = frame_queue.get()
+        class_ids, confidences, boxes = detect_objects(yolo_model, frame, classes)
+        annotated_frame = draw_boxes(frame, class_ids, confidences, boxes, classes)
+        result_queue.put(annotated_frame)
+
 # Main function to run object detection
 def main():
     current_directory = os.getcwd()
@@ -87,24 +96,26 @@ def main():
     classes = []
     with open(f"{current_directory}/Camera Video Analysis Module/yolo/data/coco.names", "r") as f:
         classes = [line.strip() for line in f.readlines()]
+    
+    frame_queue = multiprocessing.Queue(maxsize=2)  # Adjust maxsize for buffering
+    result_queue = multiprocessing.Queue(maxsize=1)
 
-    # Open camera for video capture
-    cap = cv2.VideoCapture(0)  # Change 0 to your camera index or video file path
+    process = multiprocessing.Process(target=process_frames, args=(frame_queue, result_queue, yolo_neural_network, classes))
+    process.start()
+
 
     try:
+        # Open camera for video capture
+        cap = cv2.VideoCapture(0)  # Change 0 to your camera index or video file path
         while True:
             ret, frame = cap.read()
-            # Resize input frames to a smaller resolution
             frame_resized = cv2.resize(frame, INPUT_FRAME_RESOLUTION)
-
-            # Perform object detection on the resized frame
-            class_ids, confidences, boxes = detect_objects(yolo_neural_network, frame_resized, classes)
-
-            # Draw bounding boxes and labels on the frame
-            annotated_frame = draw_boxes(frame_resized, class_ids, confidences, boxes, classes)
-
-            # Display the annotated frame
-            display_frame(annotated_frame)
+            frame_queue.put(frame_resized)
+            try:
+                annotated_frame = result_queue.get(timeout=1)  # Handle potential queue timeout
+                display_frame(annotated_frame)
+            except:
+                print("empty queue")
 
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
@@ -113,6 +124,8 @@ def main():
         # Release the camera and close OpenCV windows
         cap.release()
         cv2.destroyAllWindows()
+        frame_queue.put(None)  # Signal process to end
+        process.join()  # Wait for processing to finish
 
 if __name__ == "__main__":
     main()
