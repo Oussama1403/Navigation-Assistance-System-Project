@@ -10,7 +10,7 @@
 - [ ] Text Recognition and Reading: Incorporate optical character recognition (OCR) to detect and read text in the environment. This can include reading signs, labels, menus, and other textual information, A voice command like "read the text" will activate the Text Recognition (optional).
 - [ ] Scene Description: Provide verbal descriptions of the user's surroundings, including information about nearby objects, their positions, and relevant contextual details.
 - [ ] Voice Feedback: Based on the object detection results and orientation detection, generate voice feedback to guide the user towards the detected door. For example, if the door is detected to the right of the user's current position, provide voice instructions such as "Turn right and walk forward to reach the door."
-- [ ] Implement Threading module for more paralell and faster detection.
+- [x] Implement multiprocessing module for more paralell and faster detection.
 - [ ] Test the code thoroughly with various input scenarios and validate the accuracy and efficiency of object detection.
 
 ## Speech Recognition Module
