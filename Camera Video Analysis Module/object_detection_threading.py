@@ -1,12 +1,17 @@
 import cv2
 import numpy as np
 import os
-
+import threading
+import queue
 
 # Constants and Configurations
 CONFIDENCE_THRESHOLD = 0.2
 NMS_THRESHOLD = 0.6
 INPUT_FRAME_RESOLUTION = (640, 480)
+
+# Create a buffer to hold frames
+# Queue for holding frames for processing
+frame_buffer = queue.Queue(maxsize=5)  # Adjust maxsize if needed
 
 # Load YOLO objecGIT t detection algorithm
 def load_yolo_model(weights_file, config_file):
@@ -76,6 +81,23 @@ def draw_boxes(frame, class_ids, confidences, boxes, classes):
 def display_frame(frame):
     cv2.imshow("Object Detection", frame)
 
+def capture_frames(cap):
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break  # Handle video end or errors
+        frame_resized = cv2.resize(frame, INPUT_FRAME_RESOLUTION)
+        frame_buffer.put(frame_resized)
+
+def process_frames(yolo_neural_network,classes):
+    while True:
+        frame = frame_buffer.get(timeout=1)
+        class_ids, confidences, boxes = detect_objects(yolo_neural_network, frame, classes)
+        annotated_frame = draw_boxes(frame, class_ids, confidences, boxes, classes)
+        display_frame(annotated_frame)
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            break
+
 # Main function to run object detection
 def main():
     current_directory = os.getcwd()
@@ -92,25 +114,19 @@ def main():
     cap = cv2.VideoCapture(0)  # Change 0 to your camera index or video file path
 
     try:
-        while True:
-            ret, frame = cap.read()
-            # Resize input frames to a smaller resolution
-            frame_resized = cv2.resize(frame, INPUT_FRAME_RESOLUTION)
-
-            # Perform object detection on the resized frame
-            class_ids, confidences, boxes = detect_objects(yolo_neural_network, frame_resized, classes)
-
-            # Draw bounding boxes and labels on the frame
-            annotated_frame = draw_boxes(frame_resized, class_ids, confidences, boxes, classes)
-
-            # Display the annotated frame
-            display_frame(annotated_frame)
-
-            if cv2.waitKey(1) & 0xFF == ord("q"):
-                break
-
+        # Start capture and processing threads
+        capture_thread = threading.Thread(target=capture_frames, args=(cap,))
+        #processing_thread = threading.Thread(target=process_frames, args=(yolo_neural_network,classes))
+        capture_thread.start()
+        #processing_thread.start()
+    
+        process_frames(yolo_neural_network,classes)
+    
+        # Wait for threads to finish
+        #capture_thread.join()
+        #processing_thread.join()
     except KeyboardInterrupt:
-        # Release the camera and close OpenCV windows
+        # Release resources
         cap.release()
         cv2.destroyAllWindows()
 
