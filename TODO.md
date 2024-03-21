@@ -7,7 +7,7 @@
 - [ ] Generate text data and provide Audio Feedback about object detected.
 - [ ] Obstacle Detection and Avoidance: Develop algorithms to detect obstacles in the user's path and provide guidance on how to navigate around them safely.
 - [ ] Orientation Detection: Implement a method to determine the user's orientation relative to the detected objects. This could involve analyzing the positions and orientations of objects in the camera feed to infer the user's direction of movement.
-- [ ] Text Recognition and Reading: Incorporate optical character recognition (OCR) to detect and read text in the environment. This can include reading signs, labels, menus, and other textual information, A voice command like "read the text" will activate the Text Recognition.
+- [ ] Text Recognition and Reading: Incorporate optical character recognition (OCR) to detect and read text in the environment. This can include reading signs, labels, menus, and other textual information, A voice command like "read the text" will activate the Text Recognition (optional).
 - [ ] Scene Description: Provide verbal descriptions of the user's surroundings, including information about nearby objects, their positions, and relevant contextual details.
 - [ ] Voice Feedback: Based on the object detection results and orientation detection, generate voice feedback to guide the user towards the detected door. For example, if the door is detected to the right of the user's current position, provide voice instructions such as "Turn right and walk forward to reach the door."
 - [ ] Implement Threading module for more paralell and faster detection.
