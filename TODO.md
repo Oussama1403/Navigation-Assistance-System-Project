@@ -22,13 +22,11 @@
 - [ ] Implement error handling and feedback mechanisms for speech recognition failures.
 
 ## Navigation Module
-- [ ] Implement google maps API for generating routes to destinations. (ON HOLD - GMAPS IS NOT FREE)
 - [x] Implement alternative for google maps API (HERE Geocode API + HERE Routing API)
 - [x] Integrate Both APIs for full navigation system.
 - [ ] Real-time turn-by-turn guidance based on the user's movement using a GPS sensor
 - [ ] Provide Audio Feedback: Use audio output (e.g., text-to-speech) to deliver the turn-by-turn instructions to the user. Ensure that the instructions are clear, concise, and easy to understand.
 - [ ] Test the navigation instructions generation system with simulated and real-world scenarios.
-- [ ] Provide Audio Feedback
 
 ## Voice Output Module
 - [ ] Convert text instructions to audio instructions.
