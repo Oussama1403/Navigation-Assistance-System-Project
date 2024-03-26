@@ -1,5 +1,8 @@
 # Changelog
 
+## March 27, 2024
+- Implemented `live_text_recognition()`;Incorporated optical character recognition (OCR) to detect and read text in the environment.
+
 ## March 18, 2024
 - Started working on the `Navigation module`.
 - Successfully pushed `main.py` file, which geocodes any destination and generates routes between any origin position and destination position using the `HERE Geocode API` and `HERE Routing API`.
