@@ -47,7 +47,12 @@ official webiste: [YOLO](https://pjreddie.com/darknet/yolo/)
    ```bash
    pip install opencv-python
    ```
+7. **Install PyTesseract**: 
+On Ubuntu, open terminal and type:
+```pip install pytesseract```
+```sudo apt install tesseract-ocr```
 
+   
 ### Using YOLO and OpenCV:
 
 1. **Perform object detection**:

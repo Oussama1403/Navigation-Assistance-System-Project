@@ -1,4 +1,5 @@
 import cv2
+import pytesseract
 import numpy as np
 import os
 import multiprocessing
@@ -83,7 +84,27 @@ def process_frames(frame_queue, result_queue, yolo_model, classes):
         frame = frame_queue.get()
         class_ids, confidences, boxes = detect_objects(yolo_model, frame, classes)
         annotated_frame = draw_boxes(frame, class_ids, confidences, boxes, classes)
+        annotated_frame = live_text_recognition(annotated_frame)
         result_queue.put(annotated_frame)
+
+def live_text_recognition(frame):
+    frame_copy = frame.copy()
+
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+    
+    # Convertir l'image en niveaux de gris
+    gray = cv2.cvtColor(frame_copy, cv2.COLOR_BGR2GRAY)
+
+    # Appliquer un flou pour réduire le bruit
+    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+
+    # Utiliser la fonction de reconnaissance de texte de Tesseract
+    text = pytesseract.image_to_string(blur)
+
+    # Afficher le texte reconnu sur la vidéo en direct
+    cv2.putText(frame_copy, text, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+    return frame_copy
 
 # Main function to run object detection
 def main():
