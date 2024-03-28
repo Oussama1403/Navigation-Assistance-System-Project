@@ -51,8 +51,13 @@ official webiste: [YOLO](https://pjreddie.com/darknet/yolo/)
 On Ubuntu, open terminal and type:
 ```pip install pytesseract```
 ```sudo apt install tesseract-ocr```
+For french language pack:
+```sudo apt install tesseract-ocr-fra```
 
-   
+8. **Install pyttsx3**
+```pip install pyttsx3```
+```sudo apt-get install libespeak1```
+
 ### Using YOLO and OpenCV:
 
 1. **Perform object detection**:
@@ -62,14 +67,14 @@ On Ubuntu, open terminal and type:
 
 2. **Run the script**:
     First, make sure you have the following file structure:
-    object_detection.py (the Python script provided)
+    camera_analysis.py (the Python script provided)
     yolo/yolov3.weights (pre-trained weights file)
     yolo/cfg/yolov3.cfg (YOLOv3 configuration file found at cfg/)
     yolo/data/coco.names (file containing names of the objects found at data/)
    - Run your Python script to perform real-time object detection using the YOLO model.
 
      ```bash
-     python object_detection.py
+     python camera_analysis.py
      ```
     The script will start capturing video from your camera and perform real-time object detection using the YOLO model. Detected objects will be annotated with bounding boxes and labels displayed on the video feed.
 

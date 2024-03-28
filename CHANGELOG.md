@@ -1,5 +1,9 @@
 # Changelog
 
+## March 28, 2024
+- Added `text_to_audio()` To output the recognized text as audio that the user can hear.
+- Updated documentation and installation files.
+
 ## March 27, 2024
 - Implemented `live_text_recognition()`;Incorporated optical character recognition (OCR) to detect and read text in the environment.
 

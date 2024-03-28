@@ -3,13 +3,15 @@ import pytesseract
 import numpy as np
 import os
 import multiprocessing
-
-
+import pyttsx3
+import time
 
 # Constants and Configurations
 CONFIDENCE_THRESHOLD = 0.2
 NMS_THRESHOLD = 0.6
 INPUT_FRAME_RESOLUTION = (640, 480)
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+pytesseract.pytesseract.TESSDATA_PREFIX = '/usr/share/tesseract-ocr/4.00/tessdata/' #directory where Tesseract language data files are stored
 
 # Load YOLO objecGIT t detection algorithm
 def load_yolo_model(weights_file, config_file):
@@ -82,49 +84,62 @@ def display_frame(frame):
 def process_frames(frame_queue, result_queue, yolo_model, classes):
     while True:
         frame = frame_queue.get()
+        frame = live_text_recognition(frame)
         class_ids, confidences, boxes = detect_objects(yolo_model, frame, classes)
         annotated_frame = draw_boxes(frame, class_ids, confidences, boxes, classes)
-        annotated_frame = live_text_recognition(annotated_frame)
         result_queue.put(annotated_frame)
 
+def text_to_audio(text):
+    #print("in")
+    engine = pyttsx3.init()
+    # Set language to French
+    engine.setProperty('voice', 'fr')
+    engine.say(text)
+    engine.runAndWait()
+    engine.stop()
+    #print("out")
+
 def live_text_recognition(frame):
-    frame_copy = frame.copy()
-
-    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
-    
     # Convertir l'image en niveaux de gris
-    gray = cv2.cvtColor(frame_copy, cv2.COLOR_BGR2GRAY)
-
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     # Appliquer un flou pour réduire le bruit
     blur = cv2.GaussianBlur(gray, (5, 5), 0)
-
     # Utiliser la fonction de reconnaissance de texte de Tesseract
-    text = pytesseract.image_to_string(blur)
-
+    text = pytesseract.image_to_string(blur,lang='fra+eng') #fra+eng
+    #print("recongnized text: ",text)
+    list_words = []
+    # show the text only when you are confident that it has been recognized correctly,
+    confidence_score = pytesseract.image_to_data(blur, lang='fra+eng', output_type=pytesseract.Output.DICT) # get the confidence scores for each recognized text box.
+    confidence_threshold = 60 # 90 or 80 for High Accuracy, 50 or 60 for balance, 30 or 40 to capture as much text as possible
+    n_boxes = len(confidence_score['text'])
+    for i in range(n_boxes): # iterate over each text box 
+        if int(confidence_score['conf'][i]) > confidence_threshold:
+            cv2.putText(frame, confidence_score['text'][i], (confidence_score['left'][i], confidence_score['top'][i]),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+            if confidence_score['text'][i].strip():  # Check if the string is not empty or whitespace
+                list_words.append(confidence_score['text'][i].strip())  # Append to list_words
+    if list_words: # Check if list_words is not empty; only call text_to_audio() when there is words    
+        text_to_audio(list_words)
     # Afficher le texte reconnu sur la vidéo en direct
-    cv2.putText(frame_copy, text, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-
-    return frame_copy
+    # todo: fix displaying unexpected characters like "??" and "?" between words due to HERSHEY font.
+    #cv2.putText(frame, unicode_text, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    return frame
 
 # Main function to run object detection
 def main():
     current_directory = os.getcwd()
-
     # Load YOLO model
     yolo_neural_network = load_yolo_model(f"{current_directory}/Camera Video Analysis Module/yolo/yolov3.weights", f"{current_directory}/Camera Video Analysis Module/yolo/cfg/yolov3.cfg")
-
     # Load class names
     classes = []
     with open(f"{current_directory}/Camera Video Analysis Module/yolo/data/coco.names", "r") as f:
         classes = [line.strip() for line in f.readlines()]
-    
+
     frame_queue = multiprocessing.Queue(maxsize=2)  # Adjust maxsize for buffering
     result_queue = multiprocessing.Queue(maxsize=1)
 
     process = multiprocessing.Process(target=process_frames, args=(frame_queue, result_queue, yolo_neural_network, classes))
     process.start()
-
-
+    
     try:
         # Open camera for video capture
         cap = cv2.VideoCapture(0)  # Change 0 to your camera index or video file path
