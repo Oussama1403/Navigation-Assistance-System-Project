@@ -5,15 +5,16 @@ from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from keras.utils import to_categorical
+import os
 
 emotion_folders = [
-    "/Users/christaldika/Desktop/archive/train/angry",
-    "/Users/christaldika/Desktop/archive/train/disgust",
-    "/Users/christaldika/Desktop/archive/train/fear",
-    "/Users/christaldika/Desktop/archive/train/happy",
-    "/Users/christaldika/Desktop/archive/train/neutral",
-    "/Users/christaldika/Desktop/archive/train/sad",
-    "/Users/christaldika/Desktop/archive/train/surprise"
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/angry",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/disgust",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/fear",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/happy",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/neutral",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/sad",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/surprise"
 ]
 
 def load_data(emotion_folders):

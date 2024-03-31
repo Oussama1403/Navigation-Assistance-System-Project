@@ -23,8 +23,8 @@ def load_data_from_folder(folder, metadata_file):
                 metadata.append(["Unknown","Unknown","Unknown"])
     return images, labels, metadata
 
-training_data_folder = "/home/top-g/Desktop/TrainingData"
-metadata_file = "/home/top-g/Desktop/Training.xlsx"
+training_data_folder = "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/Facial Recognition/TrainingDataset"
+metadata_file = "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/Facial Recognition/Training.xlsx"
 
 known_face_encodings, known_face_names, metadata = load_data_from_folder(training_data_folder, metadata_file)
 

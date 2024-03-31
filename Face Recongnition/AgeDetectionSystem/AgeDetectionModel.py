@@ -7,10 +7,10 @@ from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from keras.utils import to_categorical
 
 emotion_folders = [
-    "/home/top-g/Desktop/AgeDataSet/6-20",
-    "/home/top-g/Desktop/AgeDataSet/25-30",
-    "/home/top-g/Desktop/AgeDataSet/42-48",
-    "/home/top-g/Desktop/AgeDataSet/60-98",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/AgeDetectionSystem/AgeDataSet/6-20",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/AgeDetectionSystem/AgeDataSet/25-30",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/AgeDetectionSystem/AgeDataSet/42-48",
+    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/AgeDetectionSystem/AgeDataSet/60-98",
 ]
 
 def load_data(emotion_folders):
