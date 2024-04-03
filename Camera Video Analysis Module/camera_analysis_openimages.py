@@ -84,7 +84,7 @@ def display_frame(frame):
 def process_frames(frame_queue, result_queue, yolo_model, classes):
     while True:
         frame = frame_queue.get()
-        frame = live_text_recognition(frame)
+        #frame = live_text_recognition(frame)
         class_ids, confidences, boxes = detect_objects(yolo_model, frame, classes)
         annotated_frame = draw_boxes(frame, class_ids, confidences, boxes, classes)
         result_queue.put(annotated_frame)
@@ -128,10 +128,10 @@ def live_text_recognition(frame):
 def main():
     current_directory = os.getcwd()
     # Load YOLO model
-    yolo_neural_network = load_yolo_model(f"{current_directory}/Camera Video Analysis Module/yolo/yolov3.weights", f"{current_directory}/Camera Video Analysis Module/yolo/cfg/yolov3.cfg")
+    yolo_neural_network = load_yolo_model(f"{current_directory}/Camera Video Analysis Module/yolo/yolov3-openimages.weights", f"{current_directory}/Camera Video Analysis Module/yolo/cfg/yolov3-openimages.cfg")
     # Load class names
     classes = []
-    with open(f"{current_directory}/Camera Video Analysis Module/yolo/data/coco.names", "r") as f:
+    with open(f"{current_directory}/Camera Video Analysis Module/yolo/data/openimages.names", "r") as f:
         classes = [line.strip() for line in f.readlines()]
 
     frame_queue = multiprocessing.Queue(maxsize=2)  # Adjust maxsize for buffering

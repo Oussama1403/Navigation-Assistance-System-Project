@@ -2,6 +2,7 @@
 local_env/
 # File yolo/yolov3.weights is 236.52 MB; this exceeds GitHub's file size limit of 100.00 MB
 Camera Video Analysis Module/yolo/yolov3.weights
+Camera Video Analysis Module/yolo/yolov3-openimages.weights
 # personal notes
 notes.txt
 # Backup files in case something goes wrong

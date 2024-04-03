@@ -4,7 +4,6 @@ import numpy as np
 import os
 import multiprocessing
 import pyttsx3
-import time
 
 # Constants and Configurations
 CONFIDENCE_THRESHOLD = 0.2
