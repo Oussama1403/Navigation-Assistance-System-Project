@@ -1,5 +1,10 @@
 # Changelog
 
+## Apr 4, 2024
+- Enhance Camera Analysis Module with openimages dataset for more recognition of diverse data
+## Apr 1, 2024
+- Added Face Recognition module.
+
 ## March 28, 2024
 - Added `text_to_audio()` To output the recognized text as audio that the user can hear.
 - Updated documentation and installation files.
