@@ -45,16 +45,40 @@ def generate_route(origin, destination):
     else:
         print("Error:", response.status_code)
 
+def get_user_current_position():
+    try:
+        # Fetching public IP address
+        ip_response = requests.get('https://api.ipify.org?format=json')
+        ip_data = ip_response.json()
+        ip_address = ip_data['ip']
+
+        # Fetching location data based on IP address
+        location_response = requests.get(f'https://ipinfo.io/{ip_address}/json')
+        location_data = location_response.json()
+
+        # Extracting latitude and longitude
+        coordinates = location_data.get('loc', '').split(',')
+        latitude = float(coordinates[0])
+        longitude = float(coordinates[1])
+
+        return latitude, longitude
+    except Exception as e:
+        print("Error:", e)
+        return None, None
+
 def nav():
-    origin = (34.393949, 8.821907)  # todo: implement function to get automatically user's origin
+    latitude,longitude = get_user_current_position()  # todo: implement function to get automatically user's origin
     destination_place = "Faculty of Sciences of Gafsa, Gafsa, Tunisia"
     api_key = "fw8MiKfbDhI1AX0GizGB4gHKm2EgPk5hSGEaAcmJoSo"
     destination = geocode_address(destination_place,api_key) # Geocoding is the process of converting addresses
-
-    print("Latitude:", destination['lat'])
-    print("Longitude:", destination['lng'])
-    #destination = (34.42543,8.75964)
+    
+    print("destination coordinates : \n Latitude:", destination['lat'], "Longitude:", destination['lng'])
+    print("current user postition : \n latitude:",latitude, "Longitude:",longitude)
+    
     destination = (destination['lat'],destination['lng'])
+    current_pos = (latitude,longitude)
 
     if destination:
-        generate_route(origin, destination)
+        generate_route(current_pos, destination)
+
+nav()
