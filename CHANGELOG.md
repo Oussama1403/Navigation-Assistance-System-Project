@@ -1,5 +1,8 @@
 # Changelog
 
+## May 1, 2024
+- Added a C code in `Microcontroller/camera_server.ino` for esp32-cam that is responsible for capturing the video from camera and sending it to the pc to the **Camera Video Analysis Module**.
+
 ## Apr 4, 2024
 - Enhance Camera Analysis Module with openimages dataset for more recognition of diverse data
 ## Apr 1, 2024

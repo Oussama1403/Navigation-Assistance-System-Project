@@ -32,6 +32,6 @@
 - [ ] Convert text instructions to audio instructions.
 
 ## Microcontroller
-- [ ] Develop a python script that is responsible for capturing the video from camera and sending it to the pc to the **Camera Video Analysis Module**
+- [x] Develop a python script that is responsible for capturing the video from camera and sending it to the pc to the **Camera Video Analysis Module**
 - [ ] Develop a python script that is responsible for capturing the audio from micro and sending it to the pc to the **Speech Recognition Module**
 - [ ] Develop a python file to receive upcoming audio instructions from pc (objects and navigation audio instructions) and delivering them to the Voice Output Device.
