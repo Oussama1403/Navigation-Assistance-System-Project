@@ -1,10 +1,10 @@
 import cv2
 from keras.models import load_model
 import numpy as np
-
+import os
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-age_model = load_model("/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/AgeDetectionSystem/age_detection_model.h5")
+age_model = load_model(os.path.join(os.getcwd(), "Face Recongnition","AgeDetectionSystem", "age_detection_model.h5"))
 
 AGE = ["6-20","25-30","42-48","60-98"]
 

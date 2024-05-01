@@ -4,7 +4,7 @@ import numpy as np
 import h5py
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-emotion_model = load_model("/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/EmotionDetectionSystem/emotion_detection_model.h5")
+emotion_model = load_model(r"Face Recongnition\EmotionDetectionSystem\EmotionDetectionSystem\emotion_detection_model.h5")
 
 EMOTIONS = ["Angry","Digust","Fear","Happy","Sad","Surprise","Neutral"]
 

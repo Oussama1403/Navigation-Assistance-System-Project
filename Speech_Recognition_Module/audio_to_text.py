@@ -2,16 +2,25 @@ import speech_recognition as sr
 import nltk
 from nltk.tokenize import word_tokenize
 import json
+import os,sys
+
+# Add the parent directory of the current script (Speech_Recognition_Module) to the Python path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
+sys.path.append(parent_dir)
+
+from Navigation_Module import main
 
 
 def load_destinations():
-    with open("Speech Recognition Module/destinations.json", "r") as f:
+    with open("Speech_Recognition_Module/destinations.json", "r") as f:
         destinations = json.load(f)
         print(destinations)
     return destinations.get("destinations", [])
 
 def process_text(text,destinations):
     tokens = word_tokenize(text) # split text using NTLK
+    print("tokens :",tokens)
     #if any(word in tokens for word in ["go", "take", "destination"]):
         #print("Navigational command detected.")
     matched_destinations = extract_destinations(tokens,destinations)
@@ -37,8 +46,6 @@ def process_speech():
         print("Processing...")
         text = recognizer.recognize_google(audio, language="fr-FR",show_all=True)
         print('\033[91m' , "You said:" , text , '\033[0m')
-        with open("Speech Recognition Module/output.txt","w") as f:
-            f.write(str(text))
         return text['alternative'][0]['transcript']    
     except sr.UnknownValueError:
         print("Sorry, I couldn't understand the audio.")
@@ -50,15 +57,20 @@ def main():
     recognizer = sr.Recognizer()
     destinations = load_destinations()
     print("destinations : ",destinations)
-    while True:
-        try:
-            text = process_speech()
-            matched_destinations = process_text(text.lower(),destinations)
-            print('\033[91m' , "found destination " , matched_destinations , '\033[0m')
-        except KeyboardInterrupt:
-            break
-        except:
-            print("an error happened, probably not recognized voice")
+    
+    #while True:
+    #    try:
+    #          
+    #        #nav(matched_destinations)
+    #    except KeyboardInterrupt:
+    #        break
+    #    except:
+    #        print("an error happened, probably not recognized voice")
+    
+    text = process_speech()
+    matched_destinations = process_text(text.lower(),destinations)
+    print('\033[91m' , "found destination " , matched_destinations , '\033[0m')
+    print(matched_destinations)       
 
 if __name__ == "__main__":
     main()

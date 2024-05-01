@@ -45,17 +45,16 @@ def generate_route(origin, destination):
     else:
         print("Error:", response.status_code)
 
+def nav():
+    origin = (34.393949, 8.821907)  # todo: implement function to get automatically user's origin
+    destination_place = "Faculty of Sciences of Gafsa, Gafsa, Tunisia"
+    api_key = "fw8MiKfbDhI1AX0GizGB4gHKm2EgPk5hSGEaAcmJoSo"
+    destination = geocode_address(destination_place,api_key) # Geocoding is the process of converting addresses
 
-origin = (34.393949, 8.821907)  # todo: implement function to get automatically user's origin
-destination_place = "Faculty of Sciences of Gafsa, Gafsa, Tunisia"
+    print("Latitude:", destination['lat'])
+    print("Longitude:", destination['lng'])
+    #destination = (34.42543,8.75964)
+    destination = (destination['lat'],destination['lng'])
 
-api_key = "fw8MiKfbDhI1AX0GizGB4gHKm2EgPk5hSGEaAcmJoSo"
-destination = geocode_address(destination_place,api_key) # Geocoding is the process of converting addresses
-
-print("Latitude:", destination['lat'])
-print("Longitude:", destination['lng'])
-#destination = (34.42543,8.75964)
-destination = (destination['lat'],destination['lng'])
-
-if destination:
-    generate_route(origin, destination)
+    if destination:
+        generate_route(origin, destination)

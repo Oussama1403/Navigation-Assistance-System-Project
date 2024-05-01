@@ -1,1 +1,0 @@
-{'alternative': [{'transcript': 'je veux aller au carrefour', 'confidence': 0.92710316}, {'transcript': 'je veux aller au carrefours'}, {'transcript': 'Jay veux aller au carrefour'}], 'final': True}

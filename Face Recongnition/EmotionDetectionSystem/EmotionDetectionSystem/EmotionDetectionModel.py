@@ -8,13 +8,13 @@ from keras.utils import to_categorical
 import os
 
 emotion_folders = [
-    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/angry",
-    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/disgust",
-    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/fear",
-    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/happy",
-    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/neutral",
-    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/sad",
-    "/home/top-g/Documents/Navigation-Assistance-System-Project/Face Recongnition/EmotionDetectionSystem/surprise"
+    "Face Recongnition\EmotionDetectionSystem\angry",
+    "Face Recongnition\EmotionDetectionSystem\disgust",
+    "Face Recongnition\EmotionDetectionSystem\fear",
+    "Face Recongnition\EmotionDetectionSystem\happy",
+    "Face Recongnition\EmotionDetectionSystem\neutral",
+    "Face Recongnition\EmotionDetectionSystem\sad",
+    "Face Recongnition\EmotionDetectionSystem\surprise"
 ]
 
 def load_data(emotion_folders):
