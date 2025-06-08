@@ -1,61 +1,86 @@
-### Text Recognition and Object Detection Documentation
+### Text Recognition, Object Detection, Face & Currency Recognition Documentation
 
-This document provides an overview of the Python script `camera_analysis.py`  for real-time text recognition and object detection using OpenCV, PyTesseract, pyttsx3 and YOLO (You Only Look Once) neural network.
+This document provides an overview of the Python script `yolov8_camera_local.py` for real-time object detection, text recognition, face recognition, currency classification, and distance estimation using OpenCV, PyTesseract, pyttsx3, YOLOv8 (You Only Look Once), face_recognition, and a fine-tuned MobileNet model.
 
 ### Overview
 
-The script captures frames from a video source, performs object detection to identify objects in the frames, and utilizes PyTesseract for real-time text recognition and it speaks the text using pyttsx3 librarie, Detected objects are annotated with bounding boxes and labels, and recognized text is displayed on the video stream. The script employs multiprocessing to handle frame processing and rendering simultaneously for improved performance.
+The script captures frames from a video source, performs:
+- **Object detection** using YOLOv8 ONNX model.
+- **Text recognition** using PyTesseract (OCR) with real-time audio feedback.
+- **Face recognition** using the `face_recognition` library and a directory of known faces.
+- **Currency recognition** using a fine-tuned MobileNet model for Tunisian currency.
+- **Distance estimation** for detected objects using the pinhole camera model.
+- **Dominant color detection** for objects.
+- **Audio feedback** for recognized objects, text, and faces using pyttsx3.
+
+The script uses multi-threading for concurrent processing of object detection, face recognition, currency detection, and text recognition, improving performance and responsiveness.
 
 ### Libraries Used
 
-- **OpenCV (cv2)**: Used for image processing, object detection, and displaying frames.
-- **PyTesseract**: Provides an interface to Tesseract OCR (Optical Character Recognition) engine for text recognition.
-- **NumPy (np)**: Utilized for numerical operations and array manipulation.
-- **pyttsx3**: Convert text to speech.
+- **OpenCV (cv2)**: Image processing, video capture, drawing, and display.
+- **PyTesseract**: Tesseract OCR engine for text recognition.
+- **NumPy (np)**: Numerical operations and array manipulation.
+- **pyttsx3**: Text-to-speech for audio feedback.
+- **onnxruntime**: Running YOLOv8 ONNX model for object detection.
+- **face_recognition**: Face detection and recognition.
+- **TensorFlow / Keras**: For loading and running the currency classification model.
+- **threading, queue**: Multi-threading and inter-thread communication.
 
-### Functions
+### Main Features & Functions
 
-1. **load_yolo_model(weights_file, config_file)**:
-   - Loads the YOLO object detection model from the specified weights and configuration files.
+1. **Object Detection (YOLOv8)**
+   - Loads YOLOv8 ONNX model and COCO class names.
+   - Detects objects, draws bounding boxes, labels, and estimates distance.
+   - Detects dominant color of each object.
+   - Provides audio feedback for detected objects.
 
-2. **detect_objects(net, frame, classes)**:
-   - Performs object detection on the input frame using the provided YOLO neural network.
-   - Identifies objects in the frame based on specified confidence and non-maximum suppression thresholds.
-   - Returns the class IDs, confidences, and bounding boxes of the detected objects.
+2. **Text Recognition**
+   - Uses PyTesseract for OCR on video frames.
+   - Recognizes text in both English and French.
+   - Displays recognized text and provides audio feedback.
 
-3. **draw_boxes(frame, class_ids, confidences, boxes, classes)**:
-   - Draws bounding boxes and labels around the detected objects on the frame.
-   - Labels the objects with their corresponding class names and confidence scores.
+3. **Face Recognition**
+   - Loads known faces from a directory.
+   - Detects and recognizes faces in video frames.
+   - Draws bounding boxes and labels for recognized faces.
 
-4. **display_frame(frame)**:
-   - Displays the annotated frame with object detection results and recognized text.
+4. **Currency Recognition**
+   - Loads a fine-tuned MobileNet model for Tunisian currency.
+   - Pre-filters regions likely to contain currency using edge detection.
+   - Classifies detected currency notes and draws bounding boxes.
 
-5. **live_text_recognition(frame)**:
-   - Performs real-time text recognition using PyTesseract on the input frame.
-   - Converts the frame to grayscale and applies Gaussian blur to reduce noise.
-   - Utilizes PyTesseract to extract text from the preprocessed frame.
-   - Displays recognized text on the frame based on confidence scores.
+5. **Distance Estimation**
+   - Estimates real-world distance to detected objects using the pinhole camera model and known object widths.
 
-6. **text_to_audio(text)**:
-   - Function that uses pyttsx3 to convert text to speech
+6. **Dominant Color Detection**
+   - Detects the dominant color in the region of detected objects.
 
-7. **process_frames(frame_queue, result_queue, yolo_model, classes)**:
-   - Worker function executed by a separate process to handle frame processing.
-   - Retrieves frames from the input queue, performs object detection and text recognition, and puts annotated frames into the result queue.
+7. **Audio Feedback**
+   - Uses pyttsx3 to provide spoken feedback for recognized objects, text, and faces.
 
-8. **main()**:
-   - Main function responsible for initializing the script, loading YOLO model and class names, and setting up multiprocessing.
-   - Captures frames from the video source and enqueues them for processing.
-   - Retrieves annotated frames from the result queue and displays them in real-time.
-   - Handles keyboard interrupts and releases resources upon script termination.
+8. **Multi-threaded Architecture**
+   - Uses separate threads for object detection, face recognition, currency detection, and text recognition.
+   - Main thread handles video capture and display.
+   - Thread-safe sharing of detection results.
 
 ### Usage
 
-1. Ensure that the required libraries (OpenCV, PyTesseract, pyttsx3) are installed.
-2. Configure the script with the appropriate paths to YOLO weights, configuration files, and Tesseract data directory.
-3. Run the script, and it will display the video stream with annotated objects and recognized text in real-time.
-4. Press `ctrl+c` to exit the script.
+1. Ensure all required libraries are installed: OpenCV, PyTesseract, pyttsx3, onnxruntime, face_recognition, tensorflow, numpy.
+2. Place YOLOv8 ONNX model and COCO class names file in the specified paths.
+3. Place known face images in the `known_faces` directory (filenames as names).
+4. Place the currency classification model in the specified path.
+5. Run the script. The video stream will display with annotated objects, recognized text, faces, and currency.
+6. Audio feedback will be provided for detected items.
+7. Press `q` to exit the script.
+
+### Configuration
+
+- **Camera**: Uses the local PC camera (`cv2.VideoCapture(0)`).
+- **Persistence**: Detection results persist for a configurable number of frames.
+- **Intervals**: Recognition intervals for text, face, and currency can be adjusted.
+- **Confidence thresholds**: Configurable for object and currency detection.
+- **Tesseract path**: Update `pytesseract.pytesseract.tesseract_cmd` if needed.
 
 ### Conclusion
 
-This script provides a flexible and efficient solution for real-time text recognition and object detection in video streams, with the ability to configure confidence thresholds and support multiple languages for text recognition. It can be customized and integrated into various applications requiring automated visual analysis and interpretation.
+This script provides a robust, multi-modal solution for real-time visual analysis, including object detection, text and face recognition, currency classification, distance estimation, and audio feedback. The modular, multi-threaded design allows for efficient and extensible integration into assistive or navigation systems.

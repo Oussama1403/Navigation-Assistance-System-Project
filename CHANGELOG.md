@@ -1,5 +1,13 @@
 # Changelog
 
+## June 8, 2025
+- Upgraded Camera module to use YOLOv8 for more accurate and faster object detection.
+- Integrated Tunisian currency classification using a fine-tuned MobileNet model.
+- Implemented real-time distance estimation for detected objects using the pinhole camera model.
+- Added face recognition capability to the Camera module for identifying known individuals.
+- Enhanced Camera module performance and responsiveness by introducing multi-threading for concurrent processing.
+- Updated `camera_analysis_documentation.md` and `camera_analysis_installation.md` to reflect recent changes and new features.
+
 ## May 1, 2024
 - Added a C code in `Microcontroller/camera_server.ino` for esp32-cam that is responsible for capturing the video from camera and sending it to the pc to the **Camera Video Analysis Module**.
 
