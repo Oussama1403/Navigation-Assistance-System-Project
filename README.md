@@ -6,6 +6,7 @@ The Indoor and Outdoor Navigation Assistance System is a project aimed at assist
 ## Features
 - **Object Detection:** Utilizes YOLOv8 for fast and accurate detection of objects in the environment.
 - **Currency Recognition:** Identifies Tunisian banknotes using a fine-tuned MobileNet model.
+- **Text Recognition:** Extracts and recognizes text in both French and English from the environment.
 - **Distance Estimation:** Calculates the real-time distance to detected objects using the pinhole camera model.
 - **Face Recognition:** Recognizes known individuals through integrated face recognition.
 - **Speech Recognition:** Supports voice commands for hands-free navigation.
